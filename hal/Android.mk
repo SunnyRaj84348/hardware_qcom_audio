@@ -338,6 +338,7 @@ else
 LOCAL_SHARED_LIBRARIES := \
 	liblog \
 	libcutils \
+	libhardware \
 	libtinyalsa \
 	libaudioroute \
 	libdl \
@@ -356,6 +357,7 @@ LOCAL_C_INCLUDES += \
 	external/tinycompress/include \
 	system/media/audio_utils/include \
 	external/expat/lib \
+	hardware/libhardware/include \
 	$(call include-path-for, audio-route) \
 	$(call include-path-for, audio-effects) \
 	$(LOCAL_PATH)/$(AUDIO_PLATFORM) \
@@ -456,6 +458,11 @@ ifeq ($(strip $(AUDIO_FEATURE_ENABLED_FFV)), true)
     LOCAL_CFLAGS += -DFFV_ENABLED
     LOCAL_C_INCLUDES += $(TARGET_OUT_HEADERS)/mm-audio-noship/include/ffv
     LOCAL_SRC_FILES += audio_extn/ffv.c
+endif
+
+ifneq ($(strip $(AUDIO_FEATURE_ENABLED_EXT_AMPLIFIER)),false)
+    LOCAL_CFLAGS += -DEXT_AMPLIFIER_ENABLED
+    LOCAL_SRC_FILES += audio_extn/audio_amplifier.c
 endif
 
 LOCAL_CFLAGS += -Wall -Werror
