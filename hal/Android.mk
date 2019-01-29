@@ -343,7 +343,8 @@ LOCAL_SHARED_LIBRARIES := \
 	libaudioroute \
 	libdl \
 	libaudioutils \
-	libexpat
+	libexpat \
+        libprocessgroup
 endif
 
 ifeq ($(strip $(AUDIO_FEATURE_ENABLED_QAP)),true)
